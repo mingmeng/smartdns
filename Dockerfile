@@ -1,20 +1,18 @@
-FROM alpine
+FROM alpine:3.14
 
-LABEL maintainer="Ghostry <ghostry.green@gmail.com>"
+ENV SMARTDNS_VERSION="2021.08.27-1923"
 
-RUN wget https://github.com/pymumu/smartdns/releases/download/Release35/smartdns.1.2021.08.27-1923.x86_64-linux-all.tar.gz \
-  && tar zxvf smartdns.*.tar.gz \
-  && mv smartdns/usr/sbin/smartdns /bin/smartdns \
-  && chmod +x /bin/smartdns \
-  && rm -rf smartdns*
+RUN wget https://github.com/pymumu/smartdns/releases/download/Release35/smartdns-aarch64 \
+  && mv smartdns-aarch64 /bin/smartdns \
+  && chmod +x /bin/smartdns
 
 ADD start.sh /start.sh
 ADD config.conf /config.conf
 
 WORKDIR /
 
-VOLUME ["/smartdns"]
+VOLUME ["/config"]
 
-EXPOSE 53
+EXPOSE 53/tcp 53/udp
 
 CMD ["/start.sh"]
