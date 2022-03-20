@@ -1,4 +1,9 @@
 # docker-smartdns
+
+forked from: [smartdns](https://github.com/agneevX/smartdns)
+
+新增对于smartdns amd64镜像的支持
+
 **使用**
 ```
 docker pull ghostry/smartdns
